@@ -7,28 +7,39 @@
     <div class="mb-3">
       <label for="title" class="form-label">Title</label>
       <input type="text" name="listing[title]" placeholder="Add a catchy title" class="form-control"  required/>
+      <div  class="invalid-feedback">Title should be valid </div>
+      <div  class="valid-feedback">Title looks great</div>
     </div>
     <div class="mb-3">
       <label for="description" class="form-label" >Description</label>
       <textarea type="text" name="listing[description]" class="form-control" required></textarea>
+      <div  class="invalid-feedback">Please enter a short description</div>
+      <div  class="valid-feedback">Description looks great</div>
     </div>
     <div class="mb-3">
       <label for="image" class="form-label">Image Link</label>
       <input type="url" name="listing[image]" class="form-control" placeholder="enter image URL/Link"/>
+      <!-- <div  class="invalid-feedback">Image Link should be valid </div> -->
     </div>
     <div class="row">
           <div class="mb-3 col-md-4">
       <label for="price" class="form-label">Enter Price</label>
       <input type="price" name="listing[price]" placeholder="1200" class="form-control" required/>
+      <div  class="invalid-feedback">Price should be valid </div>
+      <div  class="valid-feedback">Price seems good</div>
     </div>
     <div class="mb-3 col-md-8">
         <label for="Country" class="form-label">Enter Country</label>
         <input type="text" name="listing[country]" placeholder="India" class="form-control" required/>
+        <div  class="invalid-feedback">Country name should be valid </div>
+        <div  class="valid-feedback">Country name set correclty!</div>
     </div>
     </div>
     <div class="mb-3">
       <label for="location" class="form-label">Enter Location</label>
       <input type="text" name="listing[location]" placeholder="Lucknow, Uttar Pradesh" class="form-control" required/>
+      <div  class="invalid-feedback">Location should be valid </div>
+      <div  class="valid-feedback">Location entered correclty</div>
     </div>
     <button type="submit" class="btn add-btn mt-3">Add</button>
   </form>

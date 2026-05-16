@@ -28,7 +28,7 @@ app.get("/", (req, res)=>{ res.send("Hi I am root"); });
 
 app.get("/listing", async (req, res)=>{
   const allListings =  await Listing.find({});
-  console.log(allListings);
+  // console.log(allListings);
   res.render("listings/index.ejs", {allListings});
 })
 
@@ -52,7 +52,6 @@ app.get("/listing/:id", async (req, res)=>{
 //edit route
 app.get("/listing/:id/edit", async(req, res)=>{
   let {id} = req.params;
-  console.log(id);
  let listing = await Listing.findById(id);
   res.render("listings/edit.ejs", {listing})
 })
@@ -68,7 +67,7 @@ app.put("/listing/:id", async (req, res)=>{
 app.delete("/listing/:id", async (req, res)=>{
   let {id} = req.params;
   let deletedListing = await Listing.findByIdAndDelete(id);
-  console.log(deletedListing);
+  // console.log(deletedListing);
   res.redirect("/listing");
 })
 
