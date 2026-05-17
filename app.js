@@ -6,6 +6,7 @@ const Listing = require("./models/listing.js")
 const path = require("path");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
+const wrapAsync = require("./utils/wrapAsync.js")
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"))
@@ -32,11 +33,13 @@ app.get("/listing", async (req, res)=>{
   res.render("listings/index.ejs", {allListings});
 })
 
-app.post("/listings",async (req, res)=>{
-  const newListing = new Listing(req.body.listing);
+app.post("/listings",wrapAsync(async (req, res, next)=>{
+
+   const newListing = new Listing(req.body.listing);
   await newListing.save();
   res.redirect("/listing");
-})
+
+}))
 
 //create -route
 app.get("/listing/new", (req, res)=>{
@@ -70,5 +73,11 @@ app.delete("/listing/:id", async (req, res)=>{
   // console.log(deletedListing);
   res.redirect("/listing");
 })
+
+//middleware for error handling
+app.use((err, req, res, next)=>{
+  res.send("something went wrong");
+})
+
 
 app.listen(8080, ()=>{ console.log("Server is listening at port 8080");});
