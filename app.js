@@ -7,6 +7,7 @@ const path = require("path");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const wrapAsync = require("./utils/wrapAsync.js")
+const ExpressError = require("./utils/ExpressError.js");
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"))
@@ -24,6 +25,7 @@ main()
 async function main () {
     await mongoose.connect(MONGO_URL);
 }
+
 
 app.get("/", (req, res)=>{ res.send("Hi I am root"); });
 
@@ -74,10 +76,14 @@ app.delete("/listing/:id", async (req, res)=>{
   res.redirect("/listing");
 })
 
-//middleware for error handling
-app.use((err, req, res, next)=>{
-  res.send("something went wrong");
+app.all(/.*/, (req, res, next)=>{
+  next(new ExpressError(404, "Page not found!"));
 })
 
+//middleware for error handling
+app.use((err, req, res, next)=>{
+  let {statusCode = 500, message = "Something went wrong!"} = err;
+  res.status(statusCode).send(message);
+})
 
 app.listen(8080, ()=>{ console.log("Server is listening at port 8080");});
