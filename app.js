@@ -32,7 +32,7 @@ async function main() {
 }
 
 app.get("/", (req, res) => {
-  res.send("Hi I am root");
+  res.send("Hi I am root <br/> <a href='/listing' >to listing</a>");
 });
 
 const validateListing = (req, res, next) => {
